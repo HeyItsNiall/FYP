@@ -18,4 +18,4 @@ Dr Sofa is a web application built with Laravel 9 that allows users to easily re
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/dr-sofa.git
+<pre>git clone https://github.com/your-username/dr-sofa.git</pre>
