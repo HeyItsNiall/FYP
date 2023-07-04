@@ -18,4 +18,82 @@ Dr Sofa is a web application built with Laravel 9 that allows users to easily re
 
 1. Clone the repository:
 
-<pre>git clone https://github.com/your-username/dr-sofa.git</pre>
+<pre>gh repo clone HeyItsNiall/FYP</pre>
+
+2. Navigate to the project directory:
+
+<pre>cd dr-sofa</pre>
+
+3. Install the dependencies using Composer:
+
+<pre>composer install</pre>
+
+4. Copy the `.env.example` file to `.env`:
+
+<pre>cp .env.example .env</pre>
+
+5. Generate a new application key:
+
+<pre>php artisan key:generate</pre>
+
+6. Configure the database settings in the `.env` file:
+
+<pre>
+  DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+</pre>
+
+7. Run the database migrations and seed the database:
+
+<pre>php artisan migrate</pre>
+
+8. Start the development server:
+
+<pre>php artisan serve</pre>
+
+9. Visit `http://localhost:8000` in your browser to access the application.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to Dr Sofa, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature/bugfix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Credits
+
+Dr Sofa is developed by [Dannial](https://github.com/HeyItsNiall/FYP).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
