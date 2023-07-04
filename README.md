@@ -39,7 +39,7 @@ Dr Sofa is a web application built with Laravel 9 that allows users to easily re
 6. Configure the database settings in the `.env` file:
 
 <pre>
-  DB_CONNECTION=mysql
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=your_database
