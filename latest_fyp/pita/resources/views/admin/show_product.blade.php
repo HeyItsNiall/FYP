@@ -12,7 +12,6 @@
             border: 2px solid white;
             text-align: center;
             margin-top: 40px;
-
         }
 
         .font_size {
@@ -44,7 +43,7 @@
         @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
-            <div class="content-wrapper">
+            <div class="content-wrapper bg-white">
 
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -53,45 +52,32 @@
                     </div>
                 @endif
 
-                <h2 class="font_size">All Products</h2>
+                <h2 class="font_size mt-0 pt-0 pb-4 d-flex justify-content-start text-black">All Products</h2>
 
-                <table class="center">
-                    <tr class="th_color">
-                        <th clas="th_deg">Product Title</th>
-                        <th clas="th_deg">Description</th>
-                        <th clas="th_deg">Quantity</th>
-                        <th clas="th_deg">Category</th>
-                        <th clas="th_deg">Price</th>
-                        <th clas="th_deg">Discount Price</th>
-                        <th clas="th_deg">Product Image</th>
-                        <th clas="th_deg">Delete</th>
-                        <th clas="th_deg">Edit</th>
-                    </tr>
-
+                <div class="row">
                     @foreach ($product as $product)
-                        <tr>
-                            <td>{{ $product->title }}</td>
-                            <td>{{ $product->description }}</td>
-                            <td>{{ $product->quantity }}</td>
-                            <td>{{ $product->category }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->discount_price }}</td>
-                            <td>
-                                <img class="img_size" src="/product/{{ $product->image }}">
-                            </td>
-                            <td>
-                                <a href="{{ url('delete_product', $product->id) }}" class="btn btn-danger"
-                                    onclick="return confirm('Are You Sure To Delete This?')">Delete</a>
-                            </td>
-
-                            <td>
-                                <a href="{{ url('update_product', $product->id) }}" class="btn btn-success">Edit</a>
-                            </td>
-                        </tr>
+                        <div class="col-md-3 mb-4">
+                            <div class="card bg-secondary text-black">
+                                <img src="/product/{{ $product->image }}" class="card-img-top" alt="Product Image">
+                                <div class="card-header">
+                                    <h5 class="card-title p-0 m-0" style="color: black;">{{ $product->title }}</h5>
+                                </div>
+                                <div class="card-body bg-white">
+                                    <p class="card-text">{{ $product->description }}</p>
+                                    <p class="card-text">Quantity: {{ $product->quantity }}</p>
+                                    <p class="card-text">Category: {{ $product->category }}</p>
+                                    <p class="card-text">Price: {{ $product->price }}</p>
+                                    <p class="card-text">Discount Price: {{ $product->discount_price }}</p>
+                                </div>
+                                <div class="card-footer pt-3 pb-3">
+                                    <a href="{{ url('update_product', $product->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ url('delete_product', $product->id) }}" class="btn btn-danger"
+                                        onclick="return confirm('Are You Sure To Delete This?')">Delete</a>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </table>
-
-
+                </div>
             </div>
         </div>
         <!-- container-scroller -->

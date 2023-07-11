@@ -12,7 +12,6 @@
             border: 2px solid white;
             text-align: center;
             margin-top: 40px;
-
         }
 
         .font_size {
@@ -48,7 +47,7 @@
         @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
-            <div class="content-wrapper">
+            <div class="content-wrapper bg-white text-black">
 
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -57,70 +56,64 @@
                     </div>
                 @endif
 
-                <h2 class="font_size">View Reservations</h2>
-                <table class="center">
-                    <tr class="th_color">
-                        <th class="th_deg">Name</th>
-                        <th class="th_deg">Email</th>
-                        <th class="th_deg">Address</th>
-                        <th class="th_deg">Phone Number</th>
-                        <th class="th_deg">Furniture Type</th>
-                        <th class="th_deg">Repair Details</th>
-                        <th class="th_deg">Date</th>
-                        <th class="th_deg">Time Slot</th>
-                        <th class="th_deg">Images</th>
-                        <th class="th_deg">Price</th>
-                        <th class="th_deg">Status</th>
-                        <th class="th_deg">Customer Action</th>
-                    </tr>
-                    @foreach ($bookings as $bookings)
-                        <tr>
-                            <td>{{ $bookings->cust_name }}</td>
-                            <td>{{ $bookings->cust_email }}</td>
-                            <td>{{ $bookings->address }}</td>
-                            <td>{{ $bookings->cust_phone }}</td>
-                            <td>{{ $bookings->furniture_type }}</td>
-                            <td>{{ $bookings->repair_details }}</td>
-                            <td>{{ $bookings->date }}</td>
-                            <td>{{ $bookings->time_slot }}</td>
-                            <td>
-                                <img class="img_size" src="/booking/{{ $bookings->images }}" alt="">
-                            </td>
-                            <td>
-                                @if ($bookings->status == 'accepted')
-                                    @if (!$bookings->price)
-                                        <form action="{{ route('enter_price', $bookings->id) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="booking_id" value="{{ $bookings->id }}">
-                                            <input type="number" name="price" class="input_color"
-                                                placeholder="Enter Price" min="0" required>
-                                            <input type="submit" class="btn btn-primary" name="submit"
-                                                value="Enter Price">
-                                        </form>
-                                    @else
-                                        <input type="number" name="price" class="input_color"
-                                            placeholder="Enter Price" min="0" value="{{ $bookings->price }}"
-                                            readonly>
-                                    @endif
-                                @endif
-                                <p>RM {{ $bookings->price }}</p>
-                            </td>
-                            <td>
-                                @if ($bookings->status == 'processing')
-                                    <form action="{{ route('accept_reservation', $bookings->id) }}" method="POST">
-                                        @csrf
-                                        <input type="submit" class="btn btn-primary" name="submit" value="Accept">
-                                    </form>
-                                @elseif ($bookings->status == 'accepted')
-                                    @if ($bookings->price)
-                                        <p style="color: green;">Accepted</p>
-                                    @endif
-                                @endif
-                            </td>
-                            <td>{{ $bookings->action }}</td>
-                        </tr>
+                <h2 class="font_size mt-0 pt-0 pb-4 d-flex justify-content-start">View Reservations</h2>
+
+                <div class="row">
+                    @foreach ($bookings as $booking)
+                        <div class="col-md-4 mb-4">
+                            <div class="card bg-secondary shadow-sm">
+                                <div class="card-body bg-secondary">
+                                    <h5 class="card-title text-dark">Name: {{ $booking->cust_name }}</h5>
+                                    <p class="card-text">Email: {{ $booking->cust_email }}</p>
+                                    <p class="card-text">Address: {{ $booking->address }}</p>
+                                    <p class="card-text">Phone Number: {{ $booking->cust_phone }}</p>
+                                    <p class="card-text">Furniture Type: {{ $booking->furniture_type }}</p>
+                                    <p class="card-text">Repair Details: {{ $booking->repair_details }}</p>
+                                    <p class="card-text">Date: {{ $booking->date }}</p>
+                                    <p class="card-text">Time Slot: {{ $booking->time_slot }}</p>
+                                    <img class="img-fluid img-thumbnail mt-3"
+                                        style="width: 100%; height: 250px; object-fit: cover;"
+                                        src="/booking/{{ $booking->images }}" alt="">
+                                    <div class="mt-3">
+                                        @if ($booking->status == 'accepted')
+                                            @if (!$booking->price)
+                                                <form action="{{ route('enter_price', $booking->id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="booking_id"
+                                                        value="{{ $booking->id }}">
+                                                    <input type="number" name="price" class="form-control"
+                                                        placeholder="Enter Price" min="0" required>
+                                                    <input type="submit" class="btn btn-primary" name="submit"
+                                                        value="Enter Price">
+                                                </form>
+                                            @else
+                                                <input type="number" name="price" class="form-control bg-white text-dark"
+                                                    placeholder="Enter Price" min="0"
+                                                    value="{{ $booking->price }}" readonly>
+                                            @endif
+                                        @endif
+                                        <p class="mt-3">Price: RM {{ $booking->price }}</p>
+                                    </div>
+                                    <div class="mt-3">
+                                        @if ($booking->status == 'processing')
+                                            <form action="{{ route('accept_reservation', $booking->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <input type="submit" class="btn btn-primary" name="submit"
+                                                    value="Accept">
+                                            </form>
+                                        @elseif ($booking->status == 'accepted')
+                                            @if ($booking->price)
+                                                <p style="color: green;">Status: Accepted</p>
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <p>Customer Action: {{ $booking->action }}</p>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </table>
+                </div>
             </div>
         </div>
         <!-- container-scroller -->

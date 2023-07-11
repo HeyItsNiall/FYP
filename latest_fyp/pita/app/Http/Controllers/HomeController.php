@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Product;
+use DB;
+use Stripe;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
-use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\Stock;
-use App\Models\Stocklist;
-use Session;
-use Stripe;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Booking;
-use DB;
+use App\Models\Comment;
+use App\Models\Product;
+use App\Models\Stocklist;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class HomeController extends Controller
@@ -60,7 +60,7 @@ class HomeController extends Controller
             return view('supplier.home');
         } else {
 
-            $product = Product::paginate(10);
+            $product = Product::paginate(9);
             $comment = comment::orderby('id', 'desc')->get();
             $reply = reply::all();
             return view('home.userpage', compact('product', 'comment', 'reply'));

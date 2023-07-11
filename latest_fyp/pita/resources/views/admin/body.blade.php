@@ -1,8 +1,8 @@
 <div class="main-panel">
-    <div class="content-wrapper">
+    <div class="content-wrapper bg-white">
         <div class="row">
             <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
+                <div class="card bg-secondary text-black shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
+                <div class="card  bg-secondary text-black shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
+                <div class="card  bg-secondary text-black shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
+                <div class="card  bg-secondary text-black shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
+                <div class="card  bg-secondary text-black shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
+                <div class="card  bg-secondary text-black shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -118,7 +118,7 @@
         </div>
     </div>
 </div>
-<!-- content-wrapper ends -->
+{{-- <!-- content-wrapper ends -->
 <!-- partial:partials/_footer.html -->
 <footer class="footer">
     <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -131,4 +131,4 @@
 <!-- main-panel ends -->
 </div>
 <!-- page-body-wrapper ends -->
-</div>
+</div> --}}

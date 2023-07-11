@@ -17,17 +17,44 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+// Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+
+// User Grouping
+Route::group(['middleware' => ['role:0']], function () {
+    // Routes accessible only to users with 'admin' role
+
+    // ...
 });
 
-Route::get('/redirect', [HomeController::class, 'redirect'])->middleware('auth', 'verified');
+// Admin Grouping
+Route::group(['middleware' => ['role:1']], function () {
+    // Routes accessible only to users with 'admin' role
+    Route::get('/order', [AdminController::class, 'order']);
+
+    // ...
+});
+
+// Transporter Grouping
+Route::group(['middleware' => ['role:2']], function () {
+    // Routes accessible only to users with 'admin' role
+    Route::get('/deliverylist', [HomeController::class, 'deliverylist'])->name('deliverylist');
+
+    // ...
+});
+
+// Supplier Grouping
+Route::group(['middleware' => ['role:3']], function () {
+    // Routes accessible only to users with 'admin' role
+
+    // ...
+});
+
+
+Route::get('/redirect', [HomeController::class, 'redirect'])->name('dashboard');
 
 Route::get('/view_category', [AdminController::class, 'view_category']);
 Route::post('/add_category', [AdminController::class, 'add_category']);
@@ -40,7 +67,6 @@ Route::get('/delete_product/{id}', [AdminController::class, 'delete_product']);
 Route::get('/update_product/{id}', [AdminController::class, 'update_product']);
 Route::post('/update_product_confirm/{id}', [AdminController::class, 'update_product_confirm']);
 
-Route::get('/order', [AdminController::class, 'order']);
 Route::get('/delivered/{id}', [AdminController::class, 'delivered']);
 Route::get('/print_pdf/{id}', [AdminController::class, 'print_pdf']);
 Route::get('/send_email/{id}', [AdminController::class, 'send_email']);
@@ -93,7 +119,6 @@ Route::post('/update_stock_confirm/{id}', [HomeController::class, 'update_stock_
 Route::get('/pickuplist', [HomeController::class, 'pickuplist'])->name('pickuplist');
 Route::post('/enter_amount/{id}', [HomeController::class, 'enterAmount'])->name('enter_amount');
 Route::post('/pickup.update/{id}', [HomeController::class, 'updatePickupStatus'])->name('pickup.update');
-Route::get('/deliverylist', [HomeController::class, 'deliverylist'])->name('deliverylist');
 Route::put('/updateDeliveryStatus/{id}', [HomeController::class, 'updateDeliveryStatus'])->name('updateDeliveryStatus');
 
 

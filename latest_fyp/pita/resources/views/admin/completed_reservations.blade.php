@@ -12,7 +12,6 @@
             border: 2px solid white;
             text-align: center;
             margin-top: 40px;
-
         }
 
         .font_size {
@@ -48,7 +47,7 @@
         @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
-            <div class="content-wrapper">
+            <div class="content-wrapper bg-white text-dark">
 
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -57,86 +56,64 @@
                     </div>
                 @endif
 
-                <h2 class="font_size">Completed Reservations</h2>
+                <h2 class="font_size mt-0 pt-0 pb-4 d-flex justify-content-start text-black">Completed Reservations</h2>
                 @php
                     $user = Auth::user();
                 @endphp
-                <table class="center">
-                    <tr class="th_color">
-                        <th class="th_deg">Name</th>
-                        <th class="th_deg">Address</th>
-                        <th class="th_deg">Phone Number</th>
-                        <th class="th_deg">Furniture Type</th>
-                        <th class="th_deg">Date</th>
-                        <th class="th_deg">Images</th>
-                        <th class="th_deg">Price</th>
-                        <th class="th_deg">Payment Method</th>
-                        <th class="th_deg">Status</th>
-                        @if ($user->usertype == '2')
-                            <th class="th_deg">Balance Amount</th>
-                        @endif
-                        <th class="th_deg">Action</th>
-                    </tr>
+                <div class="row">
                     @foreach ($bookings as $booking)
-                        <tr>
-                            @if ($booking->transporter_status == 'picked_up')
-                                <td>{{ $booking->cust_name }}</td>
-                                <td>{{ $booking->address }}</td>
-                                <td>{{ $booking->cust_phone }}</td>
-                                <td>{{ $booking->furniture_type }}</td>
-                                <td>{{ $booking->date }}</td>
-                                <td>
-                                    <img class="img_size" src="/booking/{{ $booking->images }}" alt="">
-                                </td>
-                                <td>{{ $booking->price }}</td>
-
-                                @if ($booking->payment_method == 'deposit')
-                                    <td>
-                                        {{ $booking->payment_method }}<br>
-                                        {{ $booking->amount }}
-                                    </td>
-                                @else
-                                    <td>
-                                    </td>
-                                @endif
-
-                                <td>{{ $booking->reservations_status }}</td>
-                                @if ($user->usertype == '2')
-                                    <td>
-                                        @php
-                                            $balanceAmount = (int) $booking->price - (int) $booking->amount;
-                                        @endphp
-                                        <input type="number" name="amount" class="input_color"
-                                            value="{{ $balanceAmount }}" min="0" readonly>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('deliveredReservation', $booking->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-primary">Delivered</button>
-                                        </form>
-                                    </td>
-                                @endif
-                                @if ($booking->reservations_status === 'in progress')
-                                    <td>
-                                        <form action="{{ route('completeBooking', $booking->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-primary">Complete</button>
-                                        </form>
-                                    </td>
-                                @endif
-                                </td>
-                            @endif
-                        </tr>
+                        @if ($booking->transporter_status == 'picked_up')
+                            <div class="col-md-4 mb-4">
+                                <div class="card border-secondary">
+                                    <div class="card-body bg-secondary shadow-sm">
+                                        <h5 class="card-title text-dark">Name: {{ $booking->cust_name }}</h5>
+                                        <p class="card-text">Address: {{ $booking->address }}</p>
+                                        <p class="card-text">Phone Number: {{ $booking->cust_phone }}</p>
+                                        <p class="card-text">Furniture Type: {{ $booking->furniture_type }}</p>
+                                        <p class="card-text">Date: {{ $booking->date }}</p>
+                                        <img class="img-fluid img-thumbnail mt-3 mb-3"
+                                            style="width: 100%; height: 250px; object-fit: cover;"
+                                            src="/booking/{{ $booking->images }}" alt="">
+                                        <p class="card-text">Price: {{ $booking->price }}</p>
+                                        @if ($booking->payment_method == 'deposit')
+                                            <p class="card-text">Payment Method: {{ $booking->payment_method }}</p>
+                                            <p class="card-text">Amount: {{ $booking->amount }}</p>
+                                        @else
+                                            <p class="card-text">Payment Method:</p>
+                                            <p class="card-text">Amount:</p>
+                                        @endif
+                                        <p class="card-text">Status: {{ $booking->reservations_status }}</p>
+                                        @if ($user->usertype == '2')
+                                            @php
+                                                $balanceAmount = (int) $booking->price - (int) $booking->amount;
+                                            @endphp
+                                            <p class="card-text">Balance Amount: {{ $balanceAmount }}</p>
+                                            <form action="{{ route('deliveredReservation', $booking->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-primary">Delivered</button>
+                                            </form>
+                                        @endif
+                                        @if ($booking->reservations_status === 'in progress')
+                                            <form action="{{ route('completeBooking', $booking->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                    class="btn btn-primary bg-primary mt-3">Complete</button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
-                </table>
+                </div>
             </div>
 
             <!-- yg ni buat display balik je yg dah 'delivered' dkt transporter_status -->
 
-            <div class="content-wrapper">
+            <div class="content-wrapper bg-white text-dark">
 
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -145,46 +122,36 @@
                     </div>
                 @endif
 
-                <h2 class="font_size">Delivered Reservations</h2>
+                <h2 class="font_size mt-0 pt-0 pb-4 d-flex justify-content-start text-black">Delivered Reservations</h2>
                 @php
                     $user = Auth::user();
                 @endphp
-                <table class="center">
-                    <tr class="th_color">
-                        <th class="th_deg">Name</th>
-                        <th class="th_deg">Address</th>
-                        <th class="th_deg">Phone Number</th>
-                        <th class="th_deg">Furniture Type</th>
-                        <th class="th_deg">Date</th>
-                        <th class="th_deg">Images</th>
-                        <th class="th_deg">Price</th>
-                        <th class="th_deg">Payment Method</th>
-                        <th class="th_deg">Status</th>
-                    </tr>
+                <div class="row">
                     @foreach ($bookings as $booking)
-                        <tr>
-                            @if ($booking->transporter_status == 'delivered')
-                                <td>{{ $booking->cust_name }}</td>
-                                <td>{{ $booking->address }}</td>
-                                <td>{{ $booking->cust_phone }}</td>
-                                <td>{{ $booking->furniture_type }}</td>
-                                <td>{{ $booking->date }}</td>
-                                <td>
-                                    <img class="img_size" src="/booking/{{ $booking->images }}" alt="">
-                                </td>
-                                <td>{{ $booking->price }}</td>
-                                @if ($booking->payment_method == 'deposit')
-                                    <td>
-                                        {{ $booking->payment_method }}<br>
-                                        {{ $booking->amount }}
-                                    </td>
-                                @endif
-                                <td>{{ $booking->reservations_status }}</td>
-                                </td>
-                            @endif
-                        </tr>
+                        @if ($booking->transporter_status == 'delivered')
+                            <div class="col-md-4 mb-4">
+                                <div class="card border-secondary">
+                                    <div class="card-body bg-secondary shadow-sm">
+                                        <h5 class="card-title text-dark">Name: {{ $booking->cust_name }}</h5>
+                                        <p class="card-text">Address: {{ $booking->address }}</p>
+                                        <p class="card-text">Phone Number: {{ $booking->cust_phone }}</p>
+                                        <p class="card-text">Furniture Type: {{ $booking->furniture_type }}</p>
+                                        <p class="card-text">Date: {{ $booking->date }}</p>
+                                        <img class="img-fluid img-thumbnail mt-3 mb-3"
+                                            style="width: 100%; height: 250px; object-fit: cover;"
+                                            src="/booking/{{ $booking->images }}" alt="">
+                                        <p class="card-text">Price: {{ $booking->price }}</p>
+                                        @if ($booking->payment_method == 'deposit')
+                                            <p class="card-text">Payment Method: {{ $booking->payment_method }}</p>
+                                            <p class="card-text">Amount: {{ $booking->amount }}</p>
+                                        @endif
+                                        <p class="card-text">Status: {{ $booking->reservations_status }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
-                </table>
+                </div>
             </div>
         </div>
         <!-- container-scroller -->

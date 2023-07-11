@@ -20,9 +20,8 @@
 
     <style>
         .navbar-menu-wrapper .dropdown-menu {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-}
-
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+        }
     </style>

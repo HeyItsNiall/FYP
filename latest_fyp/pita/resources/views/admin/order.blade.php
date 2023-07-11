@@ -8,10 +8,8 @@
     <style type="text/css">
         .title_deg {
             text-align: center;
-            font-size: 25px;
-            font-weight: bold;
-            padding-bottom: 50px;
-
+            font-size: 40px;
+            padding-top: 20px;
         }
 
         .table_deg {
@@ -40,71 +38,57 @@
         @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
-            <div class="content-wrapper">
-                <h1 class="title_deg">All Orders</h1>
+            <div class="content-wrapper bg-white text-black">
+                <h1 class="title_deg justify-content-start d-flex">All Orders</h1>
 
-                <div style="padding-left: 700px; padding-bottom: 30px;">
-                    <form action="{{ url('search') }}" method="GET">
-                        @csrf
-                        <input style="color: black" type="text" name="search" placeholder="Search For Something">
-                        <input type="submit" value="Search" class="btn btn-outline-primary">
-                    </form>
-                </div>
+                <form action="{{ url('search') }}" method="GET" class="d-flex mb-3 mt-3 col-4 m-0 p-0">
+                    @csrf
+                    <input style="color: black" type="text" class="form-control bg-white" name="search"
+                        placeholder="Search for something">
+                    <input type="submit" value="Search" class="btn btn-primary bg-primary rounded-0">
+                </form>
 
-                <table class="table_deg">
-                    <tr class="th_deg">
-                        <th style="padding: 10px;">Name</th>
-                        <th style="padding: 10px;">Email</th>
-                        <th style="padding: 10px;">Address</th>
-                        <th style="padding: 10px;">Phone</th>
-                        <th style="padding: 10px;">Product Title</th>
-                        <th style="padding: 10px;">Quantity</th>
-                        <th style="padding: 10px;">Price</th>
-                        <th style="padding: 10px;">Payment Status</th>
-                        <th style="padding: 10px;">Delivery Status</th>
-                        <th style="padding: 10px;">Image</th>
-                        <th style="padding: 10px;">Delivered</th>
-                        <th style="padding: 10px;">Print PDF</th>
-                        <th style="padding: 10px;">Send Email</th>
-                    </tr>
-
+                <div class="row">
                     @forelse ($order as $order)
-                        <tr>
-                            <td>{{ $order->name }}</td>
-                            <td>{{ $order->email }}</td>
-                            <td>{{ $order->address }}</td>
-                            <td>{{ $order->phone }}</td>
-                            <td>{{ $order->product_title }}</td>
-                            <td>{{ $order->quantity }}</td>
-                            <td>{{ $order->price }}</td>
-                            <td>{{ $order->payment_status }}</td>
-                            <td>{{ $order->delivery_status }}</td>
-                            <td>
-                                <img class="img_size" src="/product/{{ $order->image }}" alt="">
-                            </td>
-                            <td>
-                                @if ($order->delivery_status == 'processing')
-                                    <a href="{{ url('delivered', $order->id) }}"
-                                        onclick="return confirm('Are you sure this product is delivered?')"
-                                        class="btn btn-primary">Delivered</a>
-                                @else
-                                    <p style="color: green;">Delivered</p>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ url('print_pdf', $order->id) }}" class="btn btn-secondary">Print PDF</a>
-                            </td>
-                            <td>
-                                <a href="{{ url('send_email', $order->id) }}" class="btn btn-info">Send Email</a>
-                            </td>
-                        </tr>
-                    @empty
-                        <div>
-                            <td colspan="16">No Data Found</td>
+                        <div class="col-md-4 mb-4">
+                            <div class="card border border-secondary shadow-sm">
+                                <div class="card-body bg-secondary text-black">
+                                    <h5 class="card-title text-dark">Name: {{ $order->name }}</h5>
+                                    <p class="card-text">Email: {{ $order->email }}</p>
+                                    <p class="card-text">Address: {{ $order->address }}</p>
+                                    <p class="card-text">Phone: {{ $order->phone }}</p>
+                                    <p class="card-text">Product Title: {{ $order->product_title }}</p>
+                                    <p class="card-text">Quantity: {{ $order->quantity }}</p>
+                                    <p class="card-text">Price: {{ $order->price }}</p>
+                                    <p class="card-text">Payment Status: {{ $order->payment_status }}</p>
+                                    <p class="card-text">Delivery Status: {{ $order->delivery_status }}</p>
+                                    <img class="img-fluid img-thumbnail mt-3" style="width: 100%; height: 250px; object-fit: cover;"
+                                        src="/product/{{ $order->image }}" alt="">
 
+
+                                    <div class="mt-3">
+                                        @if ($order->delivery_status == 'processing')
+                                            <a href="{{ url('delivered', $order->id) }}"
+                                                onclick="return confirm('Are you sure this product is delivered?')"
+                                                class="btn btn-primary">Delivered</a>
+                                        @else
+                                            <p style="color: green;">Delivered</p>
+                                        @endif
+                                        <a href="{{ url('print_pdf', $order->id) }}" class="btn btn-primary">Print
+                                            PDF</a>
+                                        <a href="{{ url('send_email', $order->id) }}" class="btn btn-info">Send
+                                            Email</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col">
+                            <p>No Data Found</p>
                         </div>
                     @endforelse
-                </table>
+                </div>
+
             </div>
         </div>
         <!-- container-scroller -->

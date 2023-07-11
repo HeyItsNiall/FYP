@@ -35,10 +35,8 @@
                                         <div class="col-md-4">
                                             <input type="submit" value="Add to Cart">
                                         </div>
-
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                         <div class="img-box">
@@ -72,9 +70,9 @@
                     </div>
                 </div>
             @endforeach
+        </div>
 
-            <span style="padding-top: 20px">
-                {!! $product->withQueryString()->links('pagination::bootstrap-5') !!}
-            </span>
+        <div class="mt-3">
+            {!! $product->withQueryString()->links('pagination::bootstrap-5') !!}
         </div>
 </section>

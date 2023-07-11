@@ -5,16 +5,16 @@
         <a class="sidebar-brand brand-logo-mini" href="{{ url('/redirect') }}"><img src="/images/drsofa.png"
                 alt="logo" /></a>
     </div>
-    <ul class="nav">
+    <ul class="nav text-white">
         <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
+            <span class="nav-link text-white">Navigation</span>
         </li>
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{ url('/redirect') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-speedometer"></i>
                 </span>
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title text-white">Dashboard</span>
             </a>
         </li>
         <li class="nav-item menu-items">
@@ -22,8 +22,8 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-laptop"></i>
                 </span>
-                <span class="menu-title">Products</span>
-                <i class="menu-arrow"></i>
+                <span class="menu-title text-white">Products</span>
+                <i class="menu-arrow text-white text-white"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
@@ -37,7 +37,7 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-playlist-play"></i>
                 </span>
-                <span class="menu-title">Category</span>
+                <span class="menu-title text-white">Category</span>
             </a>
         </li>
         <li class="nav-item menu-items">
@@ -45,7 +45,7 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-playlist-play"></i>
                 </span>
-                <span class="menu-title">Order</span>
+                <span class="menu-title text-white">Order</span>
             </a>
         </li>
         <li class="nav-item menu-items">
@@ -53,14 +53,16 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-laptop"></i>
                 </span>
-                <span class="menu-title">Reservations</span>
-                <i class="menu-arrow"></i>
+                <span class="menu-title text-white">Reservations</span>
+                <i class="menu-arrow text-white"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('/view_reservations') }}">Manage Reservations</a>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('/view_reservations') }}">Manage
+                            Reservations</a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ url('/completed_reservations') }}">Completed Reservations</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('/completed_reservations') }}">Completed
+                            Reservations</a></li>
                 </ul>
             </div>
         </li>
@@ -69,8 +71,8 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-laptop"></i>
                 </span>
-                <span class="menu-title">Stock</span>
-                <i class="menu-arrow"></i>
+                <span class="menu-title text-white">Stock</span>
+                <i class="menu-arrow text-white"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
@@ -85,7 +87,7 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-playlist-play"></i>
                 </span>
-                <span class="menu-title">Customer View</span>
+                <span class="menu-title text-white">Customer View</span>
             </a>
         </li>
     </ul>
